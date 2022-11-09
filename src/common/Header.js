@@ -49,7 +49,7 @@ const Header = () => {
                         user?.uid ?
                             <>
                                 <span className='text-white'>{user?.displayName}</span>
-                                <button onClick={handaleLogOut} className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">LogOut</button>
+                                <button onClick={handaleLogOut} className="btn bg-blue">LogOut</button>
                             </> :
                             <>
 
