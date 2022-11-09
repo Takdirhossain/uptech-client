@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'
+import { MainContext } from '../contex/AuthContex';
 const Header = () => {
+    const { user, logOut } = useContext(MainContext)
+    const handaleLogOut = () => {
+        logOut()
+            .then(result => {
+
+            })
+            .catch(error => {
+                console.error(error.message)
+            })
+    }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -12,22 +23,46 @@ const Header = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li> <Link to='/'>Home</Link> </li>
-                           
+
                             <li><a>Item 3</a></li>
                         </ul>
                     </div>
-                    <img className='h-10	w-56	'  src={logo} alt="" />
+                    <img className='h-10	w-56	' src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
                         <li className='text-xl'><Link to='/'>Home </Link></li>
-                       
-                        <li><a>Item 3</a></li>
+
+                        {
+                            user?.email ?
+                                <>
+                                    <li className='font-semibold	'> <Link to='/buy'>Review</Link></li>
+
+                                </>
+                                :
+                                <></>
+                        }
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    
-                    <Link className="btn bg-blue" to='/'>Start Now </Link>
+                    {
+                        user?.uid ?
+                            <>
+                                <span className='text-white'>{user?.displayName}</span>
+                                <button onClick={handaleLogOut} className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">LogOut</button>
+                            </> :
+                            <>
+
+                                <Link
+                                    to='/login'
+                                    className="btn bg-blue"
+                                >
+                                    Get Started
+                                </Link>
+
+                            </>
+                    }
+                    {/* <Link className="btn bg-blue" to='/'>Start Now </Link> */}
                 </div>
             </div>
         </div>
