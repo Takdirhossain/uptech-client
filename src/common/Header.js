@@ -36,7 +36,7 @@ const Header = () => {
                         {
                             user?.email ?
                                 <>
-                                    <li className='font-semibold	'> <Link to='/buy'>Review</Link></li>
+                                    <li className='font-semibold	'> <Link to='/service'>Add Product</Link></li>
 
                                 </>
                                 :
