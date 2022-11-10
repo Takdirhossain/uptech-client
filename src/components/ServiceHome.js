@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HomeCart from './HomeCart';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceHome = () => {
     const [service, setService] = useState([])
@@ -17,23 +18,30 @@ const ServiceHome = () => {
 
                 {
                     service.map(serv => <div key={serv._id} className="card  card-compact  bg-base-100 shadow-xl">
-                        <figure><img src={serv.img} alt="Shoes" /></figure>
+                        <figure>
+                            {/* <img src={serv.img} alt="Shoes" /> */}
+                            <PhotoProvider>
+                                <PhotoView src={serv.img}>
+                                    <img src={serv.img} alt="" />
+                                </PhotoView>
+                            </PhotoProvider>
+                        </figure>
                         <div className="card-body">
                             <h2 className="card-title">{serv.name}</h2>
                             <p> {
-                                serv.description.length > 250 ? 
-                                    <> {serv.description.slice(0, 250)  + '...'  } <Link className='className="btn btn-primary p-1 text-xl' to={`/service/${serv._id}`}>Read More</Link> </>
+                                serv.description.length > 250 ?
+                                    <> {serv.description.slice(0, 250) + '...'} <Link className='className="btn btn-primary p-1 text-xl' to={`/service/${serv._id}`}>Read More</Link> </>
                                     :
                                     serv.description
                             }</p>
-                            
+
                         </div>
                     </div>)
                 }
             </div>
-           <div className=' flex justify-center mb-20'>
-           <Link className="btn bg-blue " to='/services'> VIEW  ALL SERVICES </Link>
-           </div>
+            <div className=' flex justify-center mb-20'>
+                <Link className="btn bg-blue " to='/services'> VIEW  ALL SERVICES </Link>
+            </div>
         </div>
     );
 };

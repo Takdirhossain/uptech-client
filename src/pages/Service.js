@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { version } from 'react-dom';
+
 import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Allreview from '../components/Allreview';
@@ -10,16 +10,19 @@ const Service = () => {
     const data = useLoaderData()
     const [reviewed, setReviewed] = useState([])
     const { name, img, description, _id } = data
+    const time = new Date().toLocaleDateString()
+
 
     const handaleSubmit = event => {
         event.preventDefault()
         const form = event.target
         const review = event.target.review.value
-        const name = user?.displayName
+        const username = user?.displayName
         const photo = user?.photoURL
-        const addreview = { service: _id, name, review, photo, }
+        const email = user.email
+        const addreview = { service: _id, username, review, photo, time, email, name }
 
-
+        console.log(addreview)
         fetch(`https://uptech-server-takdirhossain.vercel.app/review`, {
             method: "POST",
             headers: {
@@ -59,17 +62,17 @@ const Service = () => {
                 .then(res => res.json())
                 .thne(data => {
                     console.log(data)
-                    
+
                 })
-            }
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-              )
+        }
+        Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        )
     }
 
-    
+
     return (
         <div>
             <div className="card card-side bg-base-100 shadow-xl grid md:grid-cols-1 lg:grid-cols-2 p-3 mt-28 mb-28">
@@ -77,7 +80,7 @@ const Service = () => {
                 <div className="card-body">
                     <div className='flex justify-start	'>
                         <p className='2xl font-bold'>{user?.displayName}</p>
-                        <img className='w-10' src={user?.photoURL} alt="User Profile"/>
+                        <img className='w-10' src={user?.photoURL} alt="User Profile" />
                     </div>
                     <h2 className="card-title">{name}</h2>
                     <p>{description}</p>
@@ -94,7 +97,6 @@ const Service = () => {
             <div>
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full mb-20">
-
                         <thead>
                             <tr>
                                 <th>
@@ -102,7 +104,7 @@ const Service = () => {
                                         <th>Delete</th>
                                     </label>
                                 </th>
-                                
+
                                 <th>Reviwer</th>
                                 <th>Review</th>
                                 <th> Update</th>

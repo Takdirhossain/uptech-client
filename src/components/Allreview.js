@@ -1,9 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Allreview = ({ rev, handaleDelete }) => {
-    const { name, photo, review, _id } = rev
+    const { name, photo, review, _id, time} = rev
 
    
 
@@ -23,7 +24,7 @@ const Allreview = ({ rev, handaleDelete }) => {
                     </div>
                     <div>
                         <div className="font-bold">{name}</div>
-
+<p>{time}</p>
                     </div>
                 </div>
             </td>
@@ -34,7 +35,8 @@ const Allreview = ({ rev, handaleDelete }) => {
             </td>
 
             <th>
-                <button className="btn btn-ghost btn-xs">Update</button>
+             
+              <Link to={`/update/${_id}`} className="btn btn-ghost btn-xs">Update</Link>
             </th>
         </tr>
 
