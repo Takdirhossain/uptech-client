@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import useTitle from '../hooks/useTitle';
 
 const AllServices = () => {
+    useTitle('services')
     const [service, setService] = useState([])
     useEffect(() => {
         fetch('https://uptech-server-takdirhossain.vercel.app/services')

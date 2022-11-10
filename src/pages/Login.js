@@ -3,9 +3,10 @@ import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import { MainContext } from '../contex/AuthContex';
 import {GoogleAuthProvider, FacebookAuthProvider} from 'firebase/auth'
 import Swal from 'sweetalert2';
+import useTitle from '../hooks/useTitle';
 
 const Login = () => {
-   
+   useTitle("Login")
     const { user, singupWithGoogle, singIn, singUpWithFacebook } = useContext(MainContext)
     const provider = new GoogleAuthProvider()
     const facebookProvider = new FacebookAuthProvider()

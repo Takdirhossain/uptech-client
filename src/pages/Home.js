@@ -4,8 +4,10 @@ import Latest from '../components/Latest';
 import ServiceHome from '../components/ServiceHome';
 import Trande from '../components/Trande';
 import User from '../components/User';
+import useTitle from '../hooks/useTitle';
 
 const Home = () => {
+    useTitle("Uptech Home")
     return (
         <div>
             <Banner></Banner>
